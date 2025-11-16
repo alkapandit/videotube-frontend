@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/";
+import { buildApiUrl, API_ENDPOINTS } from "../../utils/apiConfig";
 
 export const loginUser = async (payload) => {
-  const res = await axios.post(API_URL + "login", payload, {
+  const res = await axios.post(buildApiUrl(API_ENDPOINTS.LOGIN), payload, {
     withCredentials: true,
   });
 
@@ -11,10 +10,10 @@ export const loginUser = async (payload) => {
 };
 
 export const logoutUser = async () => {
-  return axios.post(API_URL + "logout", {}, { withCredentials: true });
+  return axios.post(buildApiUrl(API_ENDPOINTS.LOGOUT), {}, { withCredentials: true });
 };
 
 export const getLoggedInUser = async () => {
-  const res = await axios.get(API_URL + "me", { withCredentials: true });
+  const res = await axios.get(buildApiUrl(API_ENDPOINTS.GET_PROFILE), { withCredentials: true });
   return res.data.data;
 };
